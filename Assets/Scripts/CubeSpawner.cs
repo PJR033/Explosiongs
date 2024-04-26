@@ -4,6 +4,13 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private ExplosionCube _prefabCube;
 
+    private CubeSpawner _spawner;
+
+    private void Awake()
+    {
+        _spawner = GetComponent<CubeSpawner>();
+    }
+
     public void SpawnCubes(ExplosionCube receivedCube)
     {
         int minCubesCount = 2;
@@ -15,10 +22,10 @@ public class CubeSpawner : MonoBehaviour
         for (int i = 0; i < cubesCount; i++)
         {
             ExplosionCube newCube = Instantiate(_prefabCube, transform.position, Quaternion.identity);
-            MeshRenderer currentRenderer = newCube.GetComponent<MeshRenderer>();
+            MeshRenderer currentRenderer = newCube.Renderer;
             ChangeColor(currentRenderer);
             newCube.SpawnChance = receivedCube.SpawnChance * sizeCoefficent;
-            newCube.SetSpawner(gameObject.GetComponent<CubeSpawner>());
+            newCube.SetSpawner(_spawner);
             newCube.transform.localScale = cubesScale;
         }
     }

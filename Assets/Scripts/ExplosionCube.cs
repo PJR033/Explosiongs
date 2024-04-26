@@ -1,6 +1,7 @@
+using TMPro;
 using UnityEngine;
 
-[RequireComponent (typeof(Renderer), typeof(Rigidbody), typeof(Collider))]
+[RequireComponent(typeof(MeshRenderer), typeof(Rigidbody), typeof(Collider))]
 public class ExplosionCube : MonoBehaviour
 {
     [SerializeField] private CubeSpawner _spawner;
@@ -10,12 +11,19 @@ public class ExplosionCube : MonoBehaviour
 
     public float SpawnChance = 100;
 
+    public MeshRenderer Renderer { get; private set; }
+
+    private void Awake()
+    {
+        Renderer = GetComponent<MeshRenderer>();
+    }
+
     public void TryExplose()
     {
         float maxChance = 100f;
         float currentChance = Random.Range(0, maxChance);
 
-        if(currentChance <= SpawnChance)
+        if (currentChance <= SpawnChance)
         {
             _spawner.SpawnCubes(gameObject.GetComponent<ExplosionCube>());
             Destroy(gameObject);
@@ -33,15 +41,16 @@ public class ExplosionCube : MonoBehaviour
 
     private void Explose()
     {
+        float explosionCoefficent = 1f / transform.localScale.x;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
 
-        foreach(Collider collider in hitColliders)
+        foreach (Collider collider in hitColliders)
         {
-            Rigidbody currentBody = collider.GetComponent<Rigidbody>();
+            Rigidbody currentBody = collider.attachedRigidbody;
 
-            if(currentBody != null)
+            if (currentBody != null)
             {
-                currentBody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+                currentBody.AddExplosionForce(_explosionForce * explosionCoefficent, transform.position, _explosionRadius * explosionCoefficent);
             }
         }
 
