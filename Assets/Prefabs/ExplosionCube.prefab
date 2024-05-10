@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3009374712030819293}
   m_LocalRotation: {x: 0.30618626, y: 0.1767767, z: 0.1767767, w: 0.91855866}
   m_LocalPosition: {x: 5.5, y: 15.7, z: 17.1}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -127,8 +127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aab1926d2944844990f81d0de6605b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 0}
-  _explosionEffect: {fileID: 417761080263594739, guid: 7800b8f6b712bfe49bd663eeb3ebe1e4, type: 3}
   _explosionRadius: 30
   _explosionForce: 1000
   SpawnChance: 100
+  NotExplosed:
+    m_PersistentCalls:
+      m_Calls: []
+  IsExplosed:
+    m_PersistentCalls:
+      m_Calls: []

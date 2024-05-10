@@ -4752,6 +4752,7 @@ GameObject:
   - component: {fileID: 417761080263594748}
   - component: {fileID: 417761080263594739}
   - component: {fileID: 417761080263594738}
+  - component: {fileID: 5772239699211254008}
   m_Layer: 0
   m_Name: Explosion Fire
   m_TagString: Untagged
@@ -4858,8 +4859,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.5
+      minMaxState: 0
+      scalar: 5
       minScalar: 0.0001
       maxCurve:
         serializedVersion: 2
@@ -9547,6 +9548,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5772239699211254008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417761080263594737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec7b1aefe1dc7744ac82113030e879e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsLifeTimeEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &417761080798259113
 GameObject:
   m_ObjectHideFlags: 0

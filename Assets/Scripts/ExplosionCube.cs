@@ -1,15 +1,16 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(MeshRenderer), typeof(Rigidbody), typeof(Collider))]
 public class ExplosionCube : MonoBehaviour
 {
-    [SerializeField] private CubeSpawner _spawner;
-    [SerializeField] private ParticleSystem _explosionEffect;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
 
     public float SpawnChance = 100;
+
+    public UnityEvent<ExplosionCube> NotExplosed;
+    public UnityEvent<ExplosionCube> IsExplosed;
 
     public MeshRenderer Renderer { get; private set; }
 
@@ -25,18 +26,12 @@ public class ExplosionCube : MonoBehaviour
 
         if (currentChance <= SpawnChance)
         {
-            _spawner.SpawnCubes(gameObject.GetComponent<ExplosionCube>());
-            Destroy(gameObject);
+            NotExplosed?.Invoke(this);
         }
         else
         {
             Explose();
         }
-    }
-
-    public void SetSpawner(CubeSpawner spawner)
-    {
-        _spawner = spawner;
     }
 
     private void Explose()
@@ -54,7 +49,6 @@ public class ExplosionCube : MonoBehaviour
             }
         }
 
-        Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        IsExplosed?.Invoke(this);
     }
 }
